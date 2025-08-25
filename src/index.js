@@ -1,22 +1,15 @@
 const fs = require("fs");
-const path = require("path");
+let input = __dirname + "/input.txt";
+let output = __dirname + "/output.txt";
+const data = fs.readFileSync(input, "utf8").trim();
+let lines = data.split("\n");
 
-// Build paths relative to current file
-const inputPath = path.join(__dirname, "input.txt");   // input.txt in same folder as index.js
-const outputPath = path.join(__dirname, "output.txt"); // output.txt will be created here
-
-// Read the file
-const data = fs.readFileSync(inputPath, "utf8");
-
-// Split lines and sum numbers
 let ans = 0;
-const lines = data.trim().split("\n");
 
-lines.forEach(line => {
-  const parts = line.split(" ");       // ["apple", "10"]
-  ans += parseInt(parts[1], 10);       // add the number
+lines.forEach((line) => {
+  let parts = line.split(" ");
+  ans += parseInt(parts[1]);
 });
 
-// Write the result
-fs.writeFileSync(outputPath, ans.toString());
-console.log(`Sum written to ${outputPath}: ${ans}`);
+console.log(ans);
+fs.writeFileSync(output, ans.toString());
